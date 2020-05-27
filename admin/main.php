@@ -1,35 +1,47 @@
 <?php
-/*-----------引入檔案區--------------*/
-$xoopsOption['template_main'] = "demo_adm_main.tpl";
-include_once "header.php";
-include_once "../function.php";
+use XoopsModules\Tadtools\TadModData;
+use XoopsModules\Tadtools\Utility;
+require_once "header.php";
+$op_prfix = 'accountbook_item';
 
-/*-----------function區--------------*/
-
-//顯示預設頁面內容
-function show_content()
-{
-    global $xoopsTpl;
-
-    $main = "後台頁面開發中";
-    $xoopsTpl->assign('content', $main);
-}
-
-/*-----------執行動作判斷區----------*/
-include_once $GLOBALS['xoops']->path('/modules/system/include/functions.php');
-$op = system_CleanVars($_REQUEST, 'op', '', 'string');
-// $sn = system_CleanVars($_REQUEST, 'sn', 0, 'int');
+$accountbook_item = new TadModData(basename(__DIR__), 'tad_accountbook_item');
+$clean = $accountbook_item->clean();
+$accountbook_item->width(2, 10);
+$item_sn_arr = $accountbook_item->get_arr('tad_accountbook_item', 'item_sn', 'item_name');
+$accountbook_item->use_select('of_item_sn', $item_sn_arr, $clean['item_sn']);
+$accountbook_item->replace('of_item_sn', $item_sn_arr);
 
 switch ($op) {
+    case "create":
+        $accountbook_item->create();
+        break;
 
-    // case "xxx":
-    // xxx();
-    // header("location:{$_SERVER['PHP_SELF']}");
-    // exit;
+    case "edit":
+        $accountbook_item->edit($clean['item_sn']);
+        break;
+
+    case "show":
+        $accountbook_item->show($clean['item_sn']);
+        break;
+
+    case "update":
+        $accountbook_item->update($clean['item_sn']);
+        header("location:{$self}");
+        exit;
+
+    case "store":
+        $accountbook_item->store();
+        header("location:{$self}");
+        exit;
+
+    case "destroy":
+        $accountbook_item->destroy($clean['item_sn']);
+        header("location:{$self}");
+        exit;
 
     default:
-        show_content();
+        $accountbook_item->order(['item_sort' => '']);
+        $accountbook_item->index();
         break;
 }
-
-include_once 'footer.php';
+require_once "footer.php";

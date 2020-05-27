@@ -16,9 +16,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 defined('XOOPS_ROOT_PATH') || die('Restricted access.');
 
 /**
- * Class 物件名稱CorePreload
+ * Class Tad_accountbookCorePreload
  */
-class 物件名稱CorePreload extends XoopsPreloadItem
+class Tad_accountbookCorePreload extends XoopsPreloadItem
 {
     // to add PSR-4 autoloader
 

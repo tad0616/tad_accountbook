@@ -7,12 +7,11 @@
     <th class="c n">收入</th>
     <th class="c n">支出</th>
     <th class="c n">說明</th>
-    <th class="c n">單據圖檔</th>
     <th class="c n">附件</th>
     <th class="c n">日期</th>
     <th class="c n">功能</th>
 </tr>
-<{foreach from=$tad_accountbook_index item=acc}>
+<{foreach from=$tad_accountbook item=acc}>
     <tr>
         <td class="m">
             <{assign var=item_sn value=$acc.item_sn}>
@@ -32,9 +31,6 @@
             <a href="index.php?op=show&accountbook_sn=<{$acc.accountbook_sn}>">
                 <{$acc.accountbook_title}>
             </a>
-        </td>
-        <td class="c">
-            <{$acc.pic}>
         </td>
         <td class="c">
             <{$acc.files}>

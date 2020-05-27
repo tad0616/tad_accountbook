@@ -1,3 +1,3 @@
 <{$toolbar}>
 
-<{$tad_accountbook_index_form}>
+<{$tad_accountbook_form}>
